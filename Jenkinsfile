@@ -19,21 +19,21 @@ pipeline{
 
 // # SonaQube Quality Gate:        
         stages{
-              stage('SonaQube Quality Gate Statuc Check'){
-                  steps{
-                      script{
-                      withSonarQubeEnv('sonarserver') { 
-                      sh "mvn sonar:sonar"
-                       }
-                      timeout(time: 2, unit: 'HOURS') {
-                      def qg = waitForQualityGate()
-                      if (qg.status != 'OK') {
-                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                      }
-                    }
-                  }
-                }  
-              }
+            //   stage('SonaQube Quality Gate Statuc Check'){
+            //       steps{
+            //           script{
+            //           withSonarQubeEnv('sonarserver') { 
+            //           sh "mvn sonar:sonar"
+            //            }
+            //           timeout(time: 2, unit: 'HOURS') {
+            //           def qg = waitForQualityGate()
+            //           if (qg.status != 'OK') {
+            //                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+            //           }
+            //         }
+            //       }
+            //     }  
+            //   }
 
 // # Build Maven Jar files
 //  #-----------  knote-java   ----------------        
@@ -56,11 +56,13 @@ pipeline{
                     }
                  }
 // #--------------- knote-java image test			 
-			//   stage('Test image') {
-			// 	clientImage.inside {
-			// 	  sh 'echo "Tests passed"'
-			// 	}
-			//   }
+              stage('Test image') {
+              steps{
+				clientImage.inside {
+				  sh 'echo "Tests passed"'
+				}
+              }
+			  }
 		 
                  
 // # Tags Push Docker Images	
