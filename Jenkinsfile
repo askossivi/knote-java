@@ -56,11 +56,11 @@ pipeline{
                     }
                  }
 // #--------------- knote-java image test			 
-			  stage('Test image') {
-				clientImage.inside {
-				  sh 'echo "Tests passed"'
-				}
-			  }
+			//   stage('Test image') {
+			// 	clientImage.inside {
+			// 	  sh 'echo "Tests passed"'
+			// 	}
+			//   }
 		 
                  
 // # Tags Push Docker Images	
